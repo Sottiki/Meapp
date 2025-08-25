@@ -9,7 +9,7 @@ struct ContentView: View {
                 SkillView()
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic)) // 横スワイプ、インジケータ表示
-            .edgesIgnoringSafeArea(.bottom)
+            .ignoresSafeArea()
         }
     }
 }

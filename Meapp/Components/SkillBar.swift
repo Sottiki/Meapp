@@ -3,6 +3,7 @@ import SwiftUI
 struct SkillBar: View {
     let skill: String
     let progress: CGFloat // 0.0 ~ 1.0
+    var animated: Bool = false
 
     @State private var animateProgress = false
 
@@ -15,7 +16,7 @@ struct SkillBar: View {
                     .frame(height: 10)
                 Capsule()
                     .fill(Color.cyan)
-                    .frame(width: animateProgress ? progress * 300 : 0, height: 10)
+                    .frame(width: animated ? progress * 300 : 0, height: 10)
                     .animation(.easeOut(duration: 1), value: animateProgress)
             }
         }
@@ -28,5 +29,5 @@ struct SkillBar: View {
 
 
 #Preview {
-    SkillBar(skill: "react", progress: 0.25)
+    SkillBar(skill: "react", progress: 0.25, animated: true)
 }
