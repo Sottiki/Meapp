@@ -4,13 +4,13 @@ import MusicKit
 struct MusicLibraryView: View {
     @State private var songs: [Song] = []
     @State private var isAuthorized = false
-    
+
     var body: some View {
         ZStack {
             DarkBackgroundHUD()
             
             VStack {
-                Text("お気に入りの音楽")
+                Text("最近追加した曲")
                     .font(.title)
                     .foregroundColor(.white)
                 
@@ -64,7 +64,7 @@ struct MusicLibraryView: View {
             let status = await MusicAuthorization.request()
             if status == .authorized {
                 isAuthorized = true
-                await fetchLibrarySongs()
+                await fetchRecentSongs()
             }
         }
     }
@@ -76,6 +76,18 @@ struct MusicLibraryView: View {
             songs = Array(response.items.prefix(10))
         } catch {
             print("ライブラリ取得失敗: \(error)")
+        }
+    }
+    
+    private func fetchRecentSongs() async {
+        do {
+            var request = MusicLibraryRequest<Song>()
+            request.sort(by: \.libraryAddedDate, ascending: false)
+            let response = try await request.response()
+
+            songs = Array(response.items.prefix(5))
+        } catch {
+            print("最近追加曲取得失敗: \(error)")
         }
     }
 }
