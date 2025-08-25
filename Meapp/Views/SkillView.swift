@@ -13,9 +13,9 @@ struct SkillView: View {
                     .foregroundColor(.white)
                 Spacer()
                 VStack(spacing: 20) {
-                    // ForEach(skills.sorted(by: { $0.value > $1.value }), id: \.key) { skill, progress in
-                    //     SkillBar(skill: skill, progress: progress)
-                    // }
+                    ForEach(skills.sorted(by: { $0.value > $1.value }), id: \.key) { skill, progress in
+                        SkillBar(skill: skill, progress: progress)
+                    }
                 }.padding()
             }
             
