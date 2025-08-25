@@ -1,21 +1,17 @@
-//
-//  ContentView.swift
-//  Meapp
-//
-//  Created by Sottiki on 2025/08/18.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            // DarkBackgroundHUD() // 背景HUDは全画面共通
+            TabView {
+                ProfileCard()
+                HobbyView()
+                SkillView()
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic)) // 横スワイプ、インジケータ表示
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .padding()
     }
 }
 
